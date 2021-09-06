@@ -1,5 +1,5 @@
 from fauxgrad import Value
-from fauxgrad.test_value import graph1
+from test.test_value import graph1
 import networkx as nx
 import matplotlib.pyplot as plt
 

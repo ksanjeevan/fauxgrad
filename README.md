@@ -6,7 +6,7 @@
 </p>
 
 
-![Unit Tests](https://github.com/ksanjeevan/fauxgrad/actions/workflows/unit/badge.svg)
+![Unit Tests](https://github.com/ksanjeevan/fauxgrad/actions/workflows/unit.yaml/badge.svg)
 
 -----------------------------------------
 
