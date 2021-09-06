@@ -1,7 +1,3 @@
-"""
-A much, much worse autodiff engine written after reading
-about micrograd and tinygrad ¯\\_(ツ)_//¯
-"""
 
 class Value:
 
