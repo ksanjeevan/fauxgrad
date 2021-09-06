@@ -1,12 +1,9 @@
 # fauxgrad
 
-
 <p align="center">
   <img src="https://user-images.githubusercontent.com/12011058/132263990-4463a85e-a2ef-4b18-b1fb-e9f4ffc831b1.png" width="550px"/>
+
+<img alt="build" src="https://github.com/ksanjeevan/fauxgrad/actions/workflows/unit.yaml/badge.svg" />
 </p>
 
-
-![Unit Tests](https://github.com/ksanjeevan/fauxgrad/actions/workflows/unit.yaml/badge.svg)
-
 -----------------------------------------
-
