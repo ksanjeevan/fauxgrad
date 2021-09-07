@@ -1,4 +1,6 @@
 .DS_Store
 __pycache__/
+.ipynb_checkpoints/
 .pytest_cache
 fauxgrad.egg-info/
+.old

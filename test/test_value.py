@@ -1,8 +1,7 @@
 
+import unittest, random
 import micrograd.engine as gt
 from fauxgrad.value import Value
-
-import unittest
 
 def close(a, b, tol=1e-4):
   return abs(a-b) < tol
@@ -11,25 +10,22 @@ def graph1(ValueClass):
   a = ValueClass(-4.0)
   b = ValueClass(2.0)
   c = a * b
-  g = c + 2*c
+  g = c + c * 2
   g.backward()
   return [a, b, c, g]
 
 def graph2(ValueClass):
-  a = ValueClass(-4.0)
-  b = ValueClass(2.0)
-  c = a + b
-  d = a * b + b**3
-  c += c + 1
-  c += 1 + c + (-a)
-  d += d * 2 + (b + a).relu()
-  d += 3 * d + (b - a).relu()
-  e = c - d
-  f = e**2
-  g = f / 2.0
-  g += 10.0 / f
+  a = ValueClass(15.1)
+  b = ValueClass(-.093)
+  c = ValueClass(-13)
+
+  c += a + b
+
+  d = a * b
+  e = (c + d).relu() * (-a) + 100.43
+  g = a * 2
   g.backward()
-  return [a,b,c,d,e,f,g]
+  return [a,b,c,d,e,g]
 
 def _forward(graph, ValueClass):
   get_data = lambda x:x.data if hasattr(x, 'data') else x.val
@@ -39,7 +35,21 @@ def _back(graph, ValueClass):
   return map(lambda x: x.grad, graph(ValueClass))
 
 
-class TestFaux(unittest.TestCase):
+class TestValue(unittest.TestCase):
+
+  def test_act(self):
+    self.assertTrue( Value.rand().relu().val >= 0 )
+    self.assertTrue( 0 <= Value.rand().sigmoid().val <= 1 )
+
+  def test_add(self):
+    self.assertTrue( (Value(3) + 4).val  == 7 )
+    self.assertTrue( (Value(-5) + Value(3)).val  == -2 )
+
+  def test_mul(self):
+
+    self.assertTrue( (Value(3) * 4).val  == 12 )
+    self.assertTrue( (-Value(3)).val  == -3 )
+    self.assertTrue( (Value(-5) * Value(-3)).val  == 15 )
 
   def test_forward(self):
     for graph in [graph1, graph2]:
