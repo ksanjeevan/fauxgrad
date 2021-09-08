@@ -12,8 +12,10 @@ setup(
     license='MIT',
     install_requires=[
         'micrograd',
+        'pytest',
+        'numpy',
         'networkx',
-        'pytest'
+        'sklearn',
       ],
     keywords="automatic differentiation python",
     zip_safe=False

@@ -62,7 +62,6 @@ class Value:
       for p, g in zip(node.parents, gradients):
         p.grad += g    
 
-
   def relu(self):
     ret = Value(max(0, self.val), parents=[self])
 
@@ -91,8 +90,7 @@ class Value:
     ret.diff = diff
     return ret
 
-
-
+  # Trying to reduce bloat at the expense of usability
 
   # def __pow__(self, expon):
   #   ret = Value(self.val ** expon, parents=[self])
