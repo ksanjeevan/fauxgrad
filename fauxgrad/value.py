@@ -27,6 +27,9 @@ class Value:
     ret.diff = diff
     return ret
 
+  def __radd__(self, other):
+    return self + other
+
   def __mul__(self, other):
     other = other if isinstance(other, Value) else Value(other)
     ret = Value(self.val * other.val, parents=[self, other])
@@ -60,15 +63,6 @@ class Value:
         p.grad += g    
 
 
-  # def __pow__(self, expon):
-  #   ret = Value(self.val ** expon, parents=[self])
-
-  #   def diff(grad):
-  #     return [grad * expon * self.val ** (expon-1)]
-
-  #   ret.diff = diff
-  #   return ret
-
   def relu(self):
     ret = Value(max(0, self.val), parents=[self])
 
@@ -88,10 +82,26 @@ class Value:
     ret.diff = diff
     return ret
 
+  def log(self):
+    ret = Value(math.log(self.val), parents=[self])
 
- 
-  def __radd__(self, other):
-    return self + other
+    def diff(grad):
+      return [grad * (1/self.val)]
+
+    ret.diff = diff
+    return ret
+
+
+
+
+  # def __pow__(self, expon):
+  #   ret = Value(self.val ** expon, parents=[self])
+
+  #   def diff(grad):
+  #     return [grad * expon * self.val ** (expon-1)]
+
+  #   ret.diff = diff
+  #   return ret
 
   # def __sub__(self, other):
   #   return self + (-other)
