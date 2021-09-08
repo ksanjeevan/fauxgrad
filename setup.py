@@ -13,6 +13,7 @@ setup(
     install_requires=[
         'micrograd',
         'pytest',
+        'matplotlib',
         'numpy',
         'networkx',
         'sklearn',
