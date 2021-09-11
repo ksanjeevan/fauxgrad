@@ -7,9 +7,7 @@ class SGD:
     self.parameters = parameters
 
   def step(self):
-    for p in self.parameters:
-      p.val = p.val -  self.lr * p.grad
+    for p in self.parameters: p.val -= self.lr * p.grad
 
   def zero_grad(self):
-    for p in self.parameters:
-      p.grad = 0
+    for p in self.parameters: p.grad = 0

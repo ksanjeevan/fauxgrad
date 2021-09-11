@@ -47,9 +47,9 @@ class TestValue(unittest.TestCase):
 
   def test_mul(self):
 
-    self.assertTrue( (Value(3) * 4).val  == 12 )
-    self.assertTrue( (-Value(3)).val  == -3 )
-    self.assertTrue( (Value(-5) * Value(-3)).val  == 15 )
+    self.assertTrue( (Value(3.13) * (-4.1)).val  == -4.1*3.13 )
+    self.assertTrue( (-7.2 * Value(3)).val  == -7.2*3)
+    self.assertTrue( (-Value(-5) * Value(-3)).val  == -15 )
 
   def test_forward(self):
     for graph in [graph1, graph2]:
