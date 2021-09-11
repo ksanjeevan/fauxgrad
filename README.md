@@ -7,7 +7,7 @@
 <p align="center">
 <img src="https://github.com/ksanjeevan/fauxgrad/actions/workflows/unit.yaml/badge.svg" />
 
-<a href="https://colab.research.google.com/github/ksanjeevan/fauxgrad/blob/master/fauxgrad_example.ipynb">
+<a href="https://colab.research.google.com/github/ksanjeevan/fauxgrad/blob/master/fauxgrad_walkthrough.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 </p>
