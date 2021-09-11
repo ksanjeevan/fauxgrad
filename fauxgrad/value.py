@@ -19,9 +19,7 @@ class Value:
   def __neg__(self):
     return self * (-1)
 
-  #--------------------------------
   #----- Essential Operations -----
-
   def __add__(self, other):
     other = other if isinstance(other, Value) else Value(other)
     ret = Value(self.val + other.val, parents=[self, other])
@@ -42,7 +40,6 @@ class Value:
   #--------------------------------
 
   #-------- Backward Pass ---------
-  #--------------------------------
   def _rev_topo_sort(self):
     def traverse(node):
       if node in visit: return
@@ -62,7 +59,6 @@ class Value:
   #--------------------------------
 
   #------ Activation & Loss Functions ------ 
-  #-----------------------------------------
   def relu(self):
     ret = Value(max(0, self.val), parents=[self])
     ret.diff = lambda grad: [grad * (self.val > 0)]
