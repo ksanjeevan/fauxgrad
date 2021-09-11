@@ -3,7 +3,6 @@ import random, math
 class Value:
 
   def __init__(self, val, parents=[]):
-
     self.val = float(val)
     self.parents = parents
     
@@ -25,10 +24,8 @@ class Value:
 
   def __add__(self, other):
     other = other if isinstance(other, Value) else Value(other)
-
     ret = Value(self.val + other.val, parents=[self, other])
     ret.diff = lambda grad: [grad, grad]
-
     return ret
 
   def __radd__(self, other):
@@ -36,10 +33,8 @@ class Value:
 
   def __mul__(self, other):
     other = other if isinstance(other, Value) else Value(other)
-
     ret = Value(self.val * other.val, parents=[self, other])
     ret.diff = lambda grad: [grad * other.val, grad * self.val]
-
     return ret
 
   def __rmul__(self, other):
@@ -70,29 +65,17 @@ class Value:
   #-----------------------------------------
   def relu(self):
     ret = Value(max(0, self.val), parents=[self])
-
-    def diff(grad):
-      return [grad * (self.val > 0)]
-
-    ret.diff = diff
+    ret.diff = lambda grad: [grad * (self.val > 0)]
     return ret
 
   def sigmoid(self):
     _sigmoid = lambda x: 1/(1 + math.exp(-x))
     ret = Value(_sigmoid(self.val), parents=[self])
-
-    def diff(grad):
-      return [grad * (1-_sigmoid(self.val))*_sigmoid(self.val)]
-
-    ret.diff = diff
+    ret.diff = lambda grad: [grad * (1-_sigmoid(self.val))*_sigmoid(self.val)]
     return ret
 
   def log(self):
     ret = Value(math.log(self.val), parents=[self])
-
-    def diff(grad):
-      return [grad * (1/self.val)]
-
-    ret.diff = diff
+    ret.diff = lambda grad: [grad * (1/self.val)]
     return ret
   #-----------------------------------------
