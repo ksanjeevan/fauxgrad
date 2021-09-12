@@ -21,7 +21,7 @@ setup(
     'matplotlib',
     'numpy',
     'networkx',
-    'sklearn',
+    'sklearn>=0.21',
     'ipython>=7.21.0'
     ],
   classifiers=[
