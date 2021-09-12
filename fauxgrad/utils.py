@@ -9,6 +9,9 @@ def plot_graph(value):
   G = nx.DiGraph()
   fmt = lambda x: '[%.1f;g=%.1f]'%(x.val, x.grad) 
 
+  v_p = [(v, len(v.parents)) for v in value._rev_topo_sort()]
+  nc = {fmt(v):"#918AEF" if np>0 else "#D6D4F2" for v, np in v_p}
+
   ret = [value]
   while len(ret) > 0:
     n = ret.pop(0)
@@ -16,16 +19,25 @@ def plot_graph(value):
       G.add_edge(fmt(n),fmt(p), weight=p.grad)
       ret.append(p)
 
-  weights = [G[u][v]['weight'] for u,v in G.edges]
+  weights = [abs(G[u][v]['weight']) for u,v in G.edges]
   maxw, minw = max(weights), min(weights)
   weights = [1 + 2*(w-minw)/(maxw - minw) for w in weights]
 
-  nx.draw_spring(G, width=weights, 
+  try:
+    pos = nx.drawing.nx_agraph.graphviz_layout(G)
+  except:
+    print("`pygraphviz` is not installed. Using `random` layout")
+    pos = None
+
+  nx.draw(G, pos=pos,
+          width=3.0, 
           with_labels=True, 
           font_weight='bold',
           font_size=10,
-          edge_color='r',
-          alpha=0.7)
+          edge_color=weights,
+          edge_cmap=plt.cm.autumn_r,
+          alpha=0.7,
+          node_color=[nc[n] for n in G.nodes()])
   plt.show()
 
 
@@ -40,7 +52,7 @@ def generate_circles(num_samples):
   return X, Y.reshape(-1,1)
 
 # Visualize the contour plot of the neural net's predictions
-def visualize_plot(X, Y, m, title=None):
+def visualize_kamada_kawai(X, Y, m, title=None):
   resolution = 100
   xmin, xmax = X[:,0].min(), X[:,0].max()
   ymin, ymax = X[:,1].min(), X[:,1].max()
