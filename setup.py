@@ -6,7 +6,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
   name="fauxgrad",
-  version='0.1',
+  version='0.2',
   author='Kiran Sanjeevan Cabeza',
   url='http://github.com/ksanjeevan/fauxgrad',
   author_email="ksanjeevancabeza@gmail.com",
