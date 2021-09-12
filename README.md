@@ -48,5 +48,7 @@ plot_graph(e)
 ```
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/12011058/132263990-4463a85e-a2ef-4b18-b1fb-e9f4ffc831b1.png" width="550px"/>
+  <img src="https://user-images.githubusercontent.com/12011058/133004903-d165a145-a6e7-4cc6-91fe-8facab302345.png" width="450px"/>
 </p>
+
+
