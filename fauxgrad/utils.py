@@ -12,7 +12,7 @@ def plot_graph(value):
 
   v_p = [(v, len(v.parents)) for v in value._rev_topo_sort()]
   nc = {fmt(v):"#918AEF" if np>0 else "#D6D4F2" for v, np in v_p}
-  nc[fmt(v_p[0][0])] = "#18A32F"
+  nc[fmt(v_p[0][0])] = "#5BE772"
 
   ret = [value]
   while len(ret) > 0:
