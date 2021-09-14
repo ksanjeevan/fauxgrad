@@ -28,15 +28,14 @@ pip install fauxgrad
 Calculating some gradients:
 
 ```python
-a = Value(5)
-b = Value(-3)
-c = a * b
-d = a + c
-e = d * 2
-e.backward()
-
-print(f'The derivative that we computed before, de/da:', a.grad)
->>> -4.0
+from fauxgrad import Value
+a = Value(2.3)
+b = Value(-1)
+c = (-a * b).log()
+l = -(c.sigmoid() + b) + a
+l.backward()
+print('The derivative that we computed before, dl/da:', a.grad)
+>>> 0.91
 ```
 
 Plotting the backward pass graph:
@@ -44,11 +43,10 @@ Plotting the backward pass graph:
 
 ```python
 from fauxgrad.utils import plot_graph
-plot_graph(e)
+plot_graph(l) # green node is l, light blue nodes have no parents
 ```
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/12011058/133004903-d165a145-a6e7-4cc6-91fe-8facab302345.png" width="450px"/>
+  <img src="https://user-images.githubusercontent.com/12011058/133201721-0825f8a2-819e-42b8-be6d-ed91e0007523.png" width="850px"/>
 </p>
-
 
