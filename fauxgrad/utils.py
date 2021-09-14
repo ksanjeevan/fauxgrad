@@ -6,11 +6,13 @@ import matplotlib.pyplot as plt
 from .value import Value
 
 def plot_graph(value):
+  # ugly...
   G = nx.DiGraph()
-  fmt = lambda x: '[%.1f;g=%.1f]'%(x.val, x.grad) 
+  fmt = lambda x: '%.1f\ngrad=%.1f'%(x.val, x.grad) 
 
   v_p = [(v, len(v.parents)) for v in value._rev_topo_sort()]
   nc = {fmt(v):"#918AEF" if np>0 else "#D6D4F2" for v, np in v_p}
+  nc[fmt(v_p[0][0])] = "#18A32F"
 
   ret = [value]
   while len(ret) > 0:
@@ -29,15 +31,24 @@ def plot_graph(value):
     print("`pygraphviz` is not installed. Using `random` layout")
     pos = None
 
+  fig = plt.figure(figsize=(10,6))
+  ax = fig.add_subplot(111)
+  cmap = plt.cm.coolwarm
+  
   nx.draw(G, pos=pos,
           width=3.0, 
           with_labels=True, 
           font_weight='bold',
           font_size=10,
           edge_color=weights,
-          edge_cmap=plt.cm.autumn_r,
+          edge_cmap=cmap,
           alpha=0.7,
-          node_color=[nc[n] for n in G.nodes()])
+          node_color=[nc[n] for n in G.nodes()],
+          ax=ax)
+
+  sm = plt.cm.ScalarMappable(cmap=cmap, norm=plt.Normalize(vmin=minw, vmax=maxw))
+  sm.set_array([])
+  cbar = fig.colorbar(sm, fraction=0.1, pad=0.0, ticks=[])
   plt.show()
 
 
