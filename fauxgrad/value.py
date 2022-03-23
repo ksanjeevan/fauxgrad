@@ -2,7 +2,10 @@ import random, math
 
 class Value:
 
-  def __init__(self, val, parents=[]):
+  def __init__(self, val, parents=None):
+    if parents is None:
+      parents = []
+      
     self.val = float(val)
     self.parents = parents
     
